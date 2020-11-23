@@ -1,0 +1,262 @@
+define
+
+#####Entities#####
+	
+vulnerability sub entity,
+	key h-id,
+	has name,
+	has owasp-top-10,
+	plays exploits,
+	plays is-exploited;
+
+scope sub entity,
+	key h-id,
+	has name,
+	plays is-exploited;
+	
+resource sub entity,
+	key h-id,
+	has name,
+	has resource-reference,
+	plays is-exploited,
+	plays is-required,
+	plays is-acquired;
+
+h-task sub entity,
+	key h-id,
+	has name,
+	has owasp-top-10,
+	has owasp-testing-id,
+	plays exploits,
+	plays dependant,
+	plays master,
+	plays is-made-by,
+	plays requires,
+	plays acquires;
+	
+vuln-for-resource sub entity,
+	key h-id,
+	has v-id,
+	has r-id;
+	
+vuln-for-scope sub entity,
+	key h-id,
+	has v-id,
+	has s-id;
+	
+task-for-resource sub entity,
+	key h-id,
+	has r-id,
+	has t-id;
+
+h-attack sub entity,
+	key h-id,
+	has name,
+	has t-id,
+	plays is-made-by,
+	plays makes;
+	
+h-action sub entity,
+	has h-id,
+	has HTTP-Method,
+	has path,
+	has a-id,
+	has session-cookie,
+	has payload,
+	plays makes,
+	plays is-made-by;
+
+response sub entity,
+	has h-id,
+	has status-code,
+	has payload,
+	has response-time,
+	has a-id,
+	plays makes;
+	
+#####Relations#####
+	
+#Relations among entities
+
+vulnerability-to-scope sub relation,
+	relates is-exploited,
+	relates exploits;
+
+vulnerability-to-resource sub relation,
+	relates is-exploited,
+	relates exploits;
+	
+task-to-resource sub relation,
+	relates is-exploited,
+	relates exploits;
+
+task-to-attack sub relation,
+	relates is-made-by,
+	relates makes;
+
+attack-to-action sub relation,
+	relates is-made-by,
+	relates makes;
+	
+vuln-to-task sub relation,
+	relates exploits,
+	relates is-exploited;
+	
+master-to-dependant sub relation,
+	relates dependant,
+	relates master;
+	
+action-to-response sub relation,
+	relates makes,
+	relates is-made-by;
+	
+required-knowledge sub relation,
+	relates is-required,
+	relates requires;
+	
+acquired-knowledge sub relation,
+	relates is-acquired,
+	relates acquires;
+		
+#####Attributes#####
+
+h-id sub attribute,
+	value long;
+
+name sub attribute,
+	value string;
+
+description sub attribute,
+	value string;
+
+status-code sub attribute,
+	value long;
+	
+owasp-top-10 sub attribute,
+	value string;
+
+v-id sub attribute,
+	value long;
+
+s-id sub attribute,
+	value long;
+	
+t-id sub attribute,
+	value long;
+	
+r-id sub attribute,
+	value long;
+	
+owasp-testing-id sub attribute,
+	value string;
+	
+resource-reference sub attribute,
+	value string;
+	
+priority-level sub attribute,
+	value long;
+
+path sub attribute,
+	value string;
+
+HTTP-Method sub attribute,
+	value string;
+
+session-cookie sub attribute,
+	value string;
+
+response-time sub attribute,
+	value double;
+	
+a-id sub attribute,
+	value long;
+	
+payload sub attribute,
+	value string;
+	
+#####Rules#####
+
+def-vuln-to-scope sub rule,
+when {
+	$s isa scope, has h-id $h-id1;
+	$v isa vulnerability, has h-id $h-id2;
+	$v-r isa vuln-for-scope, has v-id $v-id1, has s-id $s-id1;
+	$v-id1 == $h-id2;
+	$s-id1 == $h-id1;
+}, then {
+	(is-exploited: $s, exploits: $v) isa vulnerability-to-scope;
+};
+
+def-vuln-to-resource sub rule,
+when {
+	$r isa resource, has h-id $h-id1;
+	$v isa vulnerability, has h-id $h-id2;
+	$v-r isa vuln-for-resource, has v-id $v-id1, has r-id $r-id1;
+	$v-id1 == $h-id2;
+	$r-id1 == $h-id1;
+}, then {
+	(is-exploited: $r, exploits: $v) isa vulnerability-to-resource;
+};
+
+def-task-to-resource sub rule,
+when {
+	$r isa resource, has h-id $h-id1;
+	$t isa h-task, has h-id $h-id2;
+	$t-r isa task-for-resource, has t-id $t-id1, has r-id $r-id1;
+	$h-id1 == $r-id1;
+	$h-id2 == $t-id1;
+}, then {
+	(is-exploited: $r, exploits: $t) isa task-to-resource;
+};
+
+
+def-task-to-attack sub rule,
+when {
+	$t isa h-task, has h-id $n1;
+	$at isa h-attack, has t-id $m2;
+	$n1 == $m2;
+}, then {
+	(is-made-by: $t, makes: $at) isa task-to-attack;
+};
+
+def-attack-to-action sub rule,
+when {
+	$at isa h-attack, has h-id $n1;
+	$ac isa h-action, has a-id $m2;
+	$n1 == $m2;
+}, then {
+	(is-made-by: $at, makes: $ac) isa attack-to-action;
+};
+
+def-action-to-response sub rule,
+when {
+	$a isa h-action, has h-id $a2;
+	$r isa response, has a-id $a1;
+	$a1 == $a2;
+}, then {
+	(is-made-by: $a, makes: $r) isa action-to-response;
+};
+
+
+def-vuln-to-task sub rule,
+when {
+	$r isa resource;
+	$t isa h-task, has owasp-top-10 $vc1;
+	$v isa vulnerability, has owasp-top-10 $vc2;
+	$t-r(is-exploited: $r, exploits: $t) isa task-to-resource;
+	$v-r(is-exploited: $r, exploits: $v) isa vulnerability-to-resource;
+	$vc1 == $vc2;
+}, then {
+	(is-exploited: $v, exploits: $t) isa vuln-to-task;
+};
+
+def-master-to-dependant sub rule,
+when {
+	$t1 isa h-task;
+	$t2 isa h-task;
+	$r isa resource;
+	$t-r1(is-required: $r, requires: $t1) isa required-knowledge;
+	$t-r2(is-acquired: $r, acquires: $t2) isa acquired-knowledge;
+}, then {
+	(master: $t2, dependant: $t1) isa master-to-dependant;
+};
