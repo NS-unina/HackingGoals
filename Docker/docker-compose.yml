@@ -1,0 +1,8 @@
+version: "3"
+services:
+  grakn-service:
+    build: .
+    volumes:
+      - ./hacking-goals:/hacking-goals
+    ports:
+      - 48555:48555
