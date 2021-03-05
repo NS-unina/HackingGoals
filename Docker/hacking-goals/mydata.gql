@@ -72,7 +72,9 @@ insert
 	$r34 isa resource, has h-id 34, has name "Thid-party components", has resource-reference "External frameworks";
 	$r35 isa resource, has h-id 35, has name "Operating system version", has resource-reference "Webserver information";
 	$r36 isa resource, has h-id 36, has name "Application entry points", has resource-reference "Application logic";
-	$r37 isa resource, has h-id 37, has name "Web application's map", has resource-reference "Application logic";	
+	$r37 isa resource, has h-id 37, has name "Web application's map", has resource-reference "Application logic";
+	$r38 isa resource, has h-id 38, has name "SQL database entry points", has resource-reference "Database";
+	$r39 isa resource, has h-id 39, has name "Scripts which take filenames as parameter", has resource-reference "Webserver information";
 
 
 
@@ -94,7 +96,7 @@ insert
 	#INJECTION TASKS#
 		$h-task1 isa h-task, has h-id 1, has name "Testing for Reflected Cross site scripting", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-001";
 		$h-task2 isa h-task, has h-id 2, has name "Testing for Stored Cross site scripting", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-002";
-		$h-task3 isa h-task, has h-id 3, has name "Testing for HTTP Verb Tampering", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-003"; #NON SO QUALI RISORSE SFRUTTA#
+		$h-task3 isa h-task, has h-id 3, has name "Testing for HTTP Verb Tampering", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-003";
 		$h-task4 isa h-task, has h-id 4, has name "Testing for HTTP Parameter pollution", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-004";
 		$h-task5 isa h-task, has h-id 5, has name "Testing for SQL Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-005";
 		$h-task6 isa h-task, has h-id 6, has name "Testing for LDAP Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-006";
@@ -108,6 +110,7 @@ insert
 		$h-task14 isa h-task, has h-id 14, has name "Testing for Buffer Overflow", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-014";
 		$h-task15 isa h-task, has h-id 15, has name "Testing for Incubated Vulnerability", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-015";
 		$h-task16 isa h-task, has h-id 16, has name "Testing for HTTP Splitting/Smuggling", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-016";
+		$h-task27 isa h-task, has h-id 27, has name "Testing for Local File Inclusion", has owasp-top-10 "Injection";
 
 #SCOPE FOR VULNERABILITIES#
 
@@ -241,48 +244,46 @@ insert
 #ATTACKS#
 	#ATTACKS FOR INJECTION TASKS#
 		#ATTACK FOR SQL INJECTION TASK#
-			#$h-attack1 isa h-attack, has h-id 1, has name "Boolean exploitation technique", has t-id 5;#
+			$h-attack1 isa h-attack, has h-id 1, has name "Check errors in answers with generic testing fuzzlist", has t-id 5;
+			$h-attack6 isa h-attack, has h-id 6, has name "Check reflection in answers with generic testing fuzzlist", has t-id 1;
+			$h-attack8 isa h-attack, has h-id 8, has name "Check data disclosure in answers with generic testing fuzzlist", has t-id 27;
 	#ATTACKS FOR GATHERING INFORMATION TASKS#
 		#ATTACK FOR IDENTIFY ENTRY POINTS#
 			$h-attack2 isa h-attack, has h-id 2, has name "Enumerate parameters", has t-id 22;
+			$h-attack5 isa h-attack, has h-id 5, has name "Enumerate database entry points", has t-id 22;
+			$h-attack7 isa h-attack, has h-id 7, has name "Enumerate Scripts which take filenames as parameter", has t-id 22;
 		#ATTACK FOR MAP THE EXECUTION PATH#
 			$h-attack3 isa h-attack, has h-id 3, has name "Web application spidering", has t-id 23;
 			$h-attack4 isa h-attack, has h-id 4, has name "Leverage webserver", has t-id 23;
-#ACTIONS#
-	#ACTIONS FOR INJECTION ATTACKS#
-		#ACTION FOR BOOLEAN EXPLOITATION TECHNIQUE ATTACK#
-			#$h-action1 isa h-action, has h-id 1, has HTTP-Method "POST", has path "/login.jsp", has payload "{username: admin@thebodgeitstore.com' or '1'='1, password: anythings}", has a-id 1;#
-			#$h-action2 isa h-action, has h-id 2, has HTTP-Method "POST", has path "/#/login", has payload "{username: insert an email ' or 1=1--, password: any}", has a-id 1;#
-	#ACTIONS FOR GATHERING INFORMATION TASKS#
-		#ACTIONS FOR ENUMERATE PARAMETERS#
-			#$h-action3 isa h-action, has h-id 3, has HTTP-Method "POST", has path "/#/login", has payload "{username, password}", has a-id 2;#
-		#ACTIONS FOR WEB APPLICATION SPIDERING#
-			#$h-action4 isa h-action, has h-id 4, has HTTP-Method "GET", has path "/#/login", has a-id 3;#
-
-#RESPONSES#
-	#RESPONSES FOR INJECTION TASKS#
-		#RESPONSE FOR LOGIN.JSP TASK#
-			#$response1 isa response, has h-id 1, has status-code 200, has a-id 1;#
-			#$response2 isa response, has h-id 2, has status-code 200, has payload "Hello x(NOT THE ADMIN)", has a-id 2;#
 
 #REQUIRED RESOURCE RELATIONS#
-    #TASK REFLECTED CROSS SITE SCRIPTING NEEDS APP ENTRY POINTS#
+    #TASK TESTING FOR REFLECTED CROSS SITE SCRIPTING NEEDS APP ENTRY POINTS#
 	$req-rel2(is-required: $r36, requires: $h-task1) isa required-knowledge;
-	#$req-rel4(is-required: $r37, requires: $h-task1) isa required-knowledge;#
+    #TASK TESTING FOR SQL INJECTION NEDDS DATABASE ENTRY POINTS#
+	$req-rel4(is-required: $r38, requires: $h-task5) isa required-knowledge;
     #TASK IDENTIFY APP ENTRY POINTS NEEDS APP MAP#
 	$req-rel3(is-required: $r37, requires: $h-task22) isa required-knowledge;
-    #TASK INJECT COMMAND NEEDS OPERATING SYSTEM VERSION#
-	#$req-rel1(is-required: $r35, requires: $h-task13) isa required-knowledge;#
+    #TASK LOCAL FILE INCLUSION NEEDS Scripts which take filenames as parameter#
+	$req-rel5(is-required: $r39, requires: $h-task27) isa required-knowledge;
+	
 	
 #ACQUIRED RESOURCES RELATIONS#
 	#ACQUIRED FOR TASKS#	
-	    #TASK IDENTIFY APP ENTRY POINTS ACQUIRED ENTRY POINTS#
+	    #TASK IDENTIFY APP ENTRY POINTS ACQUIRES ENTRY POINTS#
 		$acq-rel1(is-acquired: $r36, acquires: $h-task22) isa acquired-knowledge;
+	    #TASK IDENTIFY APP ENTRY POINTS ACQUIRES DATABASE ENTRY POINTS#
+		$acq-rel6(is-acquired: $r38, acquires: $h-task22) isa acquired-knowledge;
 	    #TASK MAP EXE PATH ACQUIRES APP MAP#
 		$acq-rel5(is-acquired: $r37, acquires: $h-task23) isa acquired-knowledge;
+	    #TASK IDENTIFY APP ENTRY POINTS ACQUIRES Scripts which take filenames as parameter#
+		$acq-rel7(is-acquired: $r39, acquires: $h-task22) isa acquired-knowledge;
 		
 	#ACQUIRED FOR ATTACKS#
 	    #ATTACK APP SPIDERING ACQUIRES APP MAP#
 		$acq-rel3(is-acquired: $r37, acquires: $h-attack3) isa acquired-knowledge;
 	    #ATTACK ENUMERATE PARAM ACQUIRES APP ENTRY POINTS#
-		$acq-rel4(is-acquired: $r36, acquires: $h-attack2) isa acquired-knowledge;
+		$acq-rel2(is-acquired: $r36, acquires: $h-attack2) isa acquired-knowledge;
+	    #ATTACK ENUMERATE DATABASE ENTRY POINTS ACQUIRES DATABASE ENTRY POINTS#
+		$acq-rel4(is-acquired: $r38, acquires: $h-attack5) isa acquired-knowledge;
+	    #ATTACK ENUMERATE SCRIPTS WHICH TAKE FILENAMES AS PARAMETER ACQUIRES SCRIPTS WHICH TAKE FILENAME AS PARAMETER#
+		$acq-rel8(is-acquired: $r39, acquires: $h-attack7) isa acquired-knowledge;

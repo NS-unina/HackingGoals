@@ -1,3 +1,29 @@
+#ESEMPIO HACKAZONE#
 insert
-#$h-action4 isa h-action, has h-id 4, has HTTP-Method "GET", has path "/#/login", has a-id 3;#
-#$h-action3 isa h-action, has h-id 3, has HTTP-Method "POST", has path "/#/login", has payload "{username, password}", has a-id 2;#
+
+#TESTING FOR REFLECTED CSS#
+#TASK 23 ATTACK 3#
+#$h-action4 isa h-action, has h-id 4, has HTTP-Method "GET", has path "/search?id&searchString=", has a-id 3;
+#TASK 22 ATTACK 2#
+#$h-action5 isa h-action, has h-id 5, has HTTP-Method "GET", has path "/search?id&searchString=", has a-id 2;
+#TASK 1(TARGET) ATTACK 7#
+#DETECTED REFLECTION#
+#$h-action6 isa h-action, has h-id 6, has HTTP-Method "GET", has path "/search?id=&searchString=%3Cscript%3Ealert%281%29%3C%2Fscript%3E", has a-id 6;
+
+#TESTING FOR SQL INJECTION#
+#TASK 23 ATTACK 3#
+#$h-action4 isa h-action, has h-id 4, has HTTP-Method "GET", has path "/#/login", has a-id 3;
+#TASK 22 ATTACK 5#
+#$h-action1 isa h-action, has h-id 1, has HTTP-Method "GET", has path "/search?id=&searchString=", has a-id 5;
+#$h-action2 isa h-action, has h-id 2, has HTTP-Method "POST", has path "/user/login", has payload "{username=&password=}", has a-id 5;
+#$h-action3 isa h-action, has h-id 3, has HTTP-Method "POST", has path "/wishlist/search", has payload "{search=}", has a-id 5;
+#TASK 5 (TARGET) ATTACK 1#
+#NO ERRORS FOUND#
+
+#TESTING FOR LFI#
+#TASK 23 ATTACK 3#
+#$h-action4 isa h-action, has h-id 4, has HTTP-Method "GET", has path "/#/login", has a-id 3;
+#TASK 22 ATTACK 7#
+#$h-action7 isa h-action, has h-id 7, has HTTP-Method "GET", has path "http://127.0.0.1/account/documents?page=", has a-id 7;
+#DETECTED DATA#
+#$h-action8 isa h-action, has h-id 8, has HTTP-Method "GET", has path "http://127.0.0.1/account/documents?page=../../../../../../../../../../etc/passwd", has a-id 8;

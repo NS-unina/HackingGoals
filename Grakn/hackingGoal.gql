@@ -290,11 +290,3 @@ when {
 }, then {
 	(is-acquired: $r, acquires: $t1) isa acquired-fact;
 };
-
-#REGOLA PER DECIDERE IL PROSSIMO TASK DA FARE PER ARRIVARE AL TASK GOAL#
-#def-next-task sub rule,
-#when {
-#
-#}, then {
-#	
-#};
