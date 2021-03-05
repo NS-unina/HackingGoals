@@ -1,0 +1,1 @@
+Script python usato per automatizzare le query su Grakn. Il parametro id_target_task contiene l'id del task goal da raggiungere. 
