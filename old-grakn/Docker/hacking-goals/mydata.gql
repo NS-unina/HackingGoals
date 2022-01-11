@@ -1,0 +1,289 @@
+insert
+
+#SCOPE#
+	$s1 isa scope, has h-id 1, has name "Integrity";
+	$s2 isa scope, has h-id 2, has name "Confidentiality";
+	$s3 isa scope, has h-id 3, has name "Availability";
+	$s4 isa scope, has h-id 4, has name "Non-Repudation";
+	$s5 isa scope, has h-id 5, has name "Access Control";
+
+#VULNERABILITIES#
+
+	#SENSITIVE DATA EXPOSURE VULN#
+		$v1 isa vulnerability, has h-id 1, has name "Storage of file with sensitive data under FTP root", has owasp-top-10 "Sensitive data exposure";
+		$v11 isa vulnerability, has h-id 11, has name "Exposure of Private Personal Information to an Unauthorized Actor", has owasp-top-10 "Sensitive data exposure";
+		$v12 isa vulnerability, has h-id 12, has name "Improper Certificate Validation", has owasp-top-10 "Sensitive data exposure";
+		$v13 isa vulnerability, has h-id 13, has name "Missing Encryption of Sensitive Data", has owasp-top-10 "Sensitive data exposure";
+		$v14 isa vulnerability, has h-id 14, has name "Cleartex Storage of Sensitive Information", has owasp-top-10 "Sensitive data exposure";
+		$v15 isa vulnerability, has h-id 15, has name "Cleartex Transmission of Sensitive Information", has owasp-top-10 "Sensitive data exposure";
+		$v16 isa vulnerability, has h-id 16, has name "Key Management Errors", has owasp-top-10 "Sensitive data exposure";
+		$v17 isa vulnerability, has h-id 17, has name "Missing cryptographic step", has owasp-top-10 "Sensitive data exposure";
+		$v18 isa vulnerability, has h-id 18, has name "Inadequate Encryption Strenght", has owasp-top-10 "Sensitive data exposure";
+		$v19 isa vulnerability, has h-id 19, has name "Use of a Broken or Risky Cryptographic Algorithm", has owasp-top-10 "Sensitive data exposure";
+		$v20 isa vulnerability, has h-id 20, has name "Reversible One-Way Hash", has owasp-top-10 "Sensitive data exposure";
+
+
+	#INJECTION VULN#
+		$v2 isa vulnerability, has h-id 2, has name "Command injection", has owasp-top-10 "Injection";
+		$v3 isa vulnerability, has h-id 3, has name "OS command injection", has owasp-top-10 "Injection";
+		$v4 isa vulnerability, has h-id 4, has name "Argument injection", has owasp-top-10 "Injection";
+		$v5 isa vulnerability, has h-id 5, has name "SQL Injection", has owasp-top-10 "Injection";
+		$v6 isa vulnerability, has h-id 6, has name "LDAP Injection", has owasp-top-10 "Injection";
+		$v7 isa vulnerability, has h-id 7, has name "XML Injection", has owasp-top-10 "Injection";
+		$v8 isa vulnerability, has h-id 8, has name "SQL Injection: Hibernate", has owasp-top-10 "Injection";
+		$v9 isa vulnerability, has h-id 9, has name "Expression Language Injection", has owasp-top-10 "Injection";
+		$v10 isa vulnerability, has h-id 10, has name "Improper Neutralization of Special Elements in Data Query Logic", has owasp-top-10 "Injection";
+
+#RESOURCES#
+
+	$r1 isa resource, has h-id 1, has name "FTP", has resource-reference "Private area";
+	$r2 isa resource, has h-id 2, has name "robots.txt", has resource-reference "Non-indexed file";
+	$r3 isa resource, has h-id 3, has name "Operating system", has resource-reference "Webserver information";
+	$r4 isa resource, has h-id 4, has name "SQL Database", has resource-reference "Database";
+	$r5 isa resource, has h-id 5, has name "Client-side scripts", has resource-reference "Application logic";
+	$r6 isa resource, has h-id 6, has name "Authentication mechanism", has resource-reference "Application logic";
+	$r7 isa resource, has h-id 7, has name "Computational power", has resource-reference "Application logic";
+	$r8 isa resource, has h-id 8, has name "XML parser", has resource-reference "Application logic";
+	$r9 isa resource, has h-id 9, has name "xmlDB", has resource-reference "Database";
+	$r10 isa resource, has h-id 10, has name "SSI directives", has resource-reference "Application logic";
+	$r11 isa resource, has h-id 11, has name "HTML pages", has resource-reference "Application logic";
+	$r12 isa resource, has h-id 12, has name "XPath parser", has resource-reference "Application logic";
+	$r13 isa resource, has h-id 13, has name "File system", has resource-reference "Database";
+	$r14 isa resource, has h-id 14, has name "Error handling mechanism", has resource-reference "Application logic";
+	$r15 isa resource, has h-id 15, has name "IMAP/SMTP Webserver", has resource-reference "Webserver information";
+	$r16 isa resource, has h-id 16, has name "Dynamic code interpreter", has resource-reference "Application logic";
+	$r17 isa resource, has h-id 17, has name "Dynamic file inclusion mechanism", has resource-reference "Application logic";
+	$r18 isa resource, has h-id 18, has name "Heap memory area", has resource-reference "System memory";
+	$r19 isa resource, has h-id 19, has name "Stack memory area", has resource-reference "System memory";
+	$r20 isa resource, has h-id 20, has name "HTTP procotol management system", has resource-reference "Application logic";
+	$r21 isa resource, has h-id 21, has name "Storing external information mechanism", has resource-reference "Application logic";
+	$r22 isa resource, has h-id 22, has name "LDAP Database", has resource-reference "Database";
+	$r23 isa resource, has h-id 23, has name "ORM Database", has resource-reference "Database";
+	$r24 isa resource, has h-id 24, has name "Employment history", has resource-reference "Sensitive information";
+	$r25 isa resource, has h-id 25, has name "Archived documents", has resource-reference "Sensitive information";
+	$r26 isa resource, has h-id 26, has name "Account passwords and other credentials", has resource-reference "Sensitive information";
+	$r27 isa resource, has h-id 27, has name "Webserver version", has resource-reference "Webserver information";
+	$r28 isa resource, has h-id 28, has name "Webserver type", has resource-reference "Webserver information";
+	$r29 isa resource, has h-id 29, has name "Webserver ports", has resource-reference "Webserver information";
+	$r30 isa resource, has h-id 30, has name "Webserver non-standard URLs", has resource-reference "Webserver information";
+	$r31 isa resource, has h-id 31, has name "Virtual hosts", has resource-reference "DNS";
+	$r32 isa resource, has h-id 32, has name "App parameters", has resource-reference "Application logic";
+	$r33 isa resource, has h-id 33, has name "Session token", has resource-reference "Application logic";
+	$r34 isa resource, has h-id 34, has name "Thid-party components", has resource-reference "External frameworks";
+	$r35 isa resource, has h-id 35, has name "Operating system version", has resource-reference "Webserver information";
+	$r36 isa resource, has h-id 36, has name "Application entry points", has resource-reference "Application logic";
+	$r37 isa resource, has h-id 37, has name "Web application's map", has resource-reference "Application logic";
+	$r38 isa resource, has h-id 38, has name "SQL database entry points", has resource-reference "Database";
+	$r39 isa resource, has h-id 39, has name "Scripts which take filenames as parameter", has resource-reference "Webserver information";
+
+
+
+#TASKS#
+
+	#INFORMATION GATHERING TASKS#
+		$h-task17 isa h-task, has h-id 17, has name "Conduct search engine discovery/reconnaissance for information leakage", has owasp-top-10 "Sensitive data exposure", has owasp-testing-id "OTG-INFO-001";
+		$h-task18 isa h-task, has h-id 18, has name "Fingerprint Web Server", has owasp-top-10 "Sensitive data exposure", has owasp-testing-id "OTG-INFO-002";
+		$h-task19 isa h-task, has h-id 19, has name "Review Webserver Metafiles for Information Leakage", has owasp-top-10 "Sensitive data exposure", has owasp-testing-id "OTG-INFO-003";
+		$h-task20 isa h-task, has h-id 20, has name "Enumerate Applications on Webserver", has owasp-top-10 "Sensitive data exposure", has owasp-testing-id "OTG-INFO-004";
+		$h-task21 isa h-task, has h-id 21, has name "Review webpage comments and metadata for information leakage", has owasp-top-10 "Sensitive data exposure", has owasp-testing-id "OTG-INFO-005";
+		$h-task22 isa h-task, has h-id 22, has name "Identify application entry points", has owasp-top-10 "Sensitive data exposure", has owasp-testing-id "OTG-INFO-006";
+		$h-task23 isa h-task, has h-id 23, has name "Map execution paths through application", has owasp-top-10 "Sensitive data exposure", has owasp-testing-id "OTG-INFO-007";
+		$h-task24 isa h-task, has h-id 24, has name "Fingerprint Web Application Framework", has owasp-top-10 "Sensitive data exposure", has owasp-testing-id "OTG-INFO-008";
+		$h-task25 isa h-task, has h-id 25, has name "Fingerprint Web Application", has owasp-top-10 "Sensitive data exposure", has owasp-testing-id "OTG-INFO-009";
+		$h-task26 isa h-task, has h-id 26, has name "Map Application Architecture", has owasp-top-10 "Sensitive data exposure", has owasp-testing-id "OTG-INFO-010";
+
+
+	#INJECTION TASKS#
+		$h-task1 isa h-task, has h-id 1, has name "Testing for Reflected Cross site scripting", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-001";
+		$h-task2 isa h-task, has h-id 2, has name "Testing for Stored Cross site scripting", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-002";
+		$h-task3 isa h-task, has h-id 3, has name "Testing for HTTP Verb Tampering", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-003";
+		$h-task4 isa h-task, has h-id 4, has name "Testing for HTTP Parameter pollution", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-004";
+		$h-task5 isa h-task, has h-id 5, has name "Testing for SQL Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-005";
+		$h-task6 isa h-task, has h-id 6, has name "Testing for LDAP Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-006";
+		$h-task7 isa h-task, has h-id 7, has name "Testing for ORM Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-007";
+		$h-task8 isa h-task, has h-id 8, has name "Testing for XML Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-008";
+		$h-task9 isa h-task, has h-id 9, has name "Testing for SSI Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-009";
+		$h-task10 isa h-task, has h-id 10, has name "Testing for XPath Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-010";
+		$h-task11 isa h-task, has h-id 11, has name "Testing for IMAP/SMTP Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-011";
+		$h-task12 isa h-task, has h-id 12, has name "Testing for Code Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-012";
+		$h-task13 isa h-task, has h-id 13, has name "Testing for Command Injection", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-013";
+		$h-task14 isa h-task, has h-id 14, has name "Testing for Buffer Overflow", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-014";
+		$h-task15 isa h-task, has h-id 15, has name "Testing for Incubated Vulnerability", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-015";
+		$h-task16 isa h-task, has h-id 16, has name "Testing for HTTP Splitting/Smuggling", has owasp-top-10 "Injection", has owasp-testing-id "OTG-INPVAL-016";
+		$h-task27 isa h-task, has h-id 27, has name "Testing for Local File Inclusion", has owasp-top-10 "Injection";
+
+#SCOPE FOR VULNERABILITIES#
+
+	#SCOPE FOR INJECTION VULNERABILITIES#
+		$vuln-for-scope1 isa vuln-for-scope, has h-id 1, has v-id 1, has s-id 2;
+		$vuln-for-scope2 isa vuln-for-scope, has h-id 2, has v-id 2, has s-id 1;
+		$vuln-for-scope3 isa vuln-for-scope, has h-id 3, has v-id 2, has s-id 2;
+		$vuln-for-scope4 isa vuln-for-scope, has h-id 4, has v-id 2, has s-id 3;
+		$vuln-for-scope5 isa vuln-for-scope, has h-id 5, has v-id 3, has s-id 1;
+		$vuln-for-scope6 isa vuln-for-scope, has h-id 6, has v-id 3, has s-id 2;
+		$vuln-for-scope7 isa vuln-for-scope, has h-id 7, has v-id 3, has s-id 3;
+		$vuln-for-scope8 isa vuln-for-scope, has h-id 8, has v-id 3, has s-id 4;
+		$vuln-for-scope9 isa vuln-for-scope, has h-id 9, has v-id 4, has s-id 1;
+		$vuln-for-scope10 isa vuln-for-scope, has h-id 10, has v-id 4, has s-id 2;
+		$vuln-for-scope11 isa vuln-for-scope, has h-id 11, has v-id 4, has s-id 3;
+		$vuln-for-scope12 isa vuln-for-scope, has h-id 12, has v-id 5, has s-id 1;
+		$vuln-for-scope13 isa vuln-for-scope, has h-id 13, has v-id 5, has s-id 2;
+		$vuln-for-scope14 isa vuln-for-scope, has h-id 14, has v-id 5, has s-id 5;
+		$vuln-for-scope15 isa vuln-for-scope, has h-id 15, has v-id 6, has s-id 1;
+		$vuln-for-scope16 isa vuln-for-scope, has h-id 16, has v-id 6, has s-id 2;
+		$vuln-for-scope17 isa vuln-for-scope, has h-id 17, has v-id 6, has s-id 3;
+		$vuln-for-scope18 isa vuln-for-scope, has h-id 18, has v-id 7, has s-id 1;
+		$vuln-for-scope19 isa vuln-for-scope, has h-id 19, has v-id 7, has s-id 2;
+		$vuln-for-scope20 isa vuln-for-scope, has h-id 20, has v-id 7, has s-id 3;
+		$vuln-for-scope21 isa vuln-for-scope, has h-id 21, has v-id 8, has s-id 1;
+		$vuln-for-scope22 isa vuln-for-scope, has h-id 22, has v-id 8, has s-id 2;
+		$vuln-for-scope23 isa vuln-for-scope, has h-id 23, has v-id 9, has s-id 1;
+		$vuln-for-scope24 isa vuln-for-scope, has h-id 24, has v-id 9, has s-id 2;
+		$vuln-for-scope25 isa vuln-for-scope, has h-id 25, has v-id 10, has s-id 1;
+		$vuln-for-scope26 isa vuln-for-scope, has h-id 26, has v-id 10, has s-id 2;
+		$vuln-for-scope27 isa vuln-for-scope, has h-id 27, has v-id 10, has s-id 3;
+		$vuln-for-scope28 isa vuln-for-scope, has h-id 28, has v-id 10, has s-id 5;
+		$vuln-for-scope29 isa vuln-for-scope, has h-id 29, has v-id 11, has s-id 2;
+		
+	#SCOPE FOR SENSITIVE DATA EXPOSURE VULNERABILITIES#
+
+
+#RESOURCES FOR VULNERABILITIES#
+
+	#RESOURCES FOR "Storage of File With Sensitive Data Under FTP Root"#
+		$vuln-for-resource1 isa vuln-for-resource, has h-id 1, has v-id 1, has r-id 1;
+	#RESOURCES FOR "Exposure of Private Personal Information to an Unauthorized Actor"#
+		$vuln-for-resource24 isa vuln-for-resource, has h-id 24, has v-id 11, has r-id 24;
+		$vuln-for-resource25 isa vuln-for-resource, has h-id 25, has v-id 11, has r-id 25;
+		$vuln-for-resource26 isa vuln-for-resource, has h-id 26, has v-id 11, has r-id 26;
+
+
+
+	#RESOURCES FOR "COMMAND INJECTION"#
+		$vuln-for-resource2 isa vuln-for-resource, has h-id 2, has v-id 2, has r-id 3;
+		$vuln-for-resource3 isa vuln-for-resource, has h-id 3, has v-id 2, has r-id 5;
+		$vuln-for-resource4 isa vuln-for-resource, has h-id 4, has v-id 2, has r-id 8;
+		$vuln-for-resource5 isa vuln-for-resource, has h-id 5, has v-id 2, has r-id 10;
+		$vuln-for-resource6 isa vuln-for-resource, has h-id 6, has v-id 2, has r-id 12;
+		$vuln-for-resource7 isa vuln-for-resource, has h-id 7, has v-id 2, has r-id 16;
+		$vuln-for-resource8 isa vuln-for-resource, has h-id 8, has v-id 2, has r-id 18;
+		$vuln-for-resource9 isa vuln-for-resource, has h-id 9, has v-id 2, has r-id 19;
+	#RESOURCES FOR "OS COMMAND INJECTION"#
+		$vuln-for-resource10 isa vuln-for-resource, has h-id 10, has v-id 3, has r-id 3;
+	#RESOURCES FOR "ARGUMETN INJECTION"
+		$vuln-for-resource11 isa vuln-for-resource, has h-id 11, has v-id 4, has r-id 13;
+		$vuln-for-resource12 isa vuln-for-resource, has h-id 12, has v-id 4, has r-id 18;
+		$vuln-for-resource13 isa vuln-for-resource, has h-id 13, has v-id 4, has r-id 19;
+	#RESOURCES FOR "SQL INJECTION"#
+		$vuln-for-resource14 isa vuln-for-resource, has h-id 14, has v-id 5, has r-id 4;
+		$vuln-for-resource15 isa vuln-for-resource, has h-id 15, has v-id 5, has r-id 7;
+	#RESOURCES FOR "LDAP INJECTION"#
+		$vuln-for-resource16 isa vuln-for-resource, has h-id 16, has v-id 6, has r-id 22;
+	#RESOURCES FOR "XML INJECTION"#
+		$vuln-for-resource17 isa vuln-for-resource, has h-id 17, has v-id 7, has r-id 8;
+		$vuln-for-resource18 isa vuln-for-resource, has h-id 18, has v-id 7, has r-id 9;
+		$vuln-for-resource19 isa vuln-for-resource, has h-id 19, has v-id 7, has r-id 12;
+	#RESOURCES FOR "SQL INJECTION: HIBERNATE"#
+		$vuln-for-resource20 isa vuln-for-resource, has h-id 20, has v-id 8, has r-id 7;
+	#RESOURCES FOR "Expression Language Injection"#
+		$vuln-for-resource21 isa vuln-for-resource, has h-id 21, has v-id 9, has r-id 13;
+		$vuln-for-resource22 isa vuln-for-resource, has h-id 22, has v-id 9, has r-id 16;
+	#RESOURCES FOR "Improper Neutralization of Special Elements in Data Query Logic"#
+		$vuln-for-resource23 isa vuln-for-resource, has h-id 23, has v-id 10, has r-id 4;
+		
+#RESOURCES FOR TASKS#
+
+	#RESOURCES FOR INJECTION TASKS#
+		$task-for-resource1 isa task-for-resource, has h-id 1, has t-id 1, has r-id 5;
+		$task-for-resource2 isa task-for-resource, has h-id 2, has t-id 2, has r-id 21;
+		$task-for-resource3 isa task-for-resource, has h-id 3, has t-id 4, has r-id 5;
+		$task-for-resource4 isa task-for-resource, has h-id 4, has t-id 4, has r-id 6;
+		$task-for-resource5 isa task-for-resource, has h-id 5, has t-id 5, has r-id 4;
+		$task-for-resource7 isa task-for-resource, has h-id 7, has t-id 5, has r-id 7;
+		$task-for-resource8 isa task-for-resource, has h-id 8, has t-id 6, has r-id 22;
+		$task-for-resource9 isa task-for-resource, has h-id 9, has t-id 7, has r-id 23;
+		$task-for-resource10 isa task-for-resource, has h-id 10, has t-id 8, has r-id 8;
+		$task-for-resource11 isa task-for-resource, has h-id 11, has t-id 8, has r-id 13;
+		$task-for-resource12 isa task-for-resource, has h-id 12, has t-id 8, has r-id 14;#AD ESEMPIO UN XXE PUO' FAR CRASHARE IL SERVER#
+		$task-for-resource13 isa task-for-resource, has h-id 13, has t-id 9, has r-id 10;
+		$task-for-resource14 isa task-for-resource, has h-id 14, has t-id 9, has r-id 11;
+		$task-for-resource15 isa task-for-resource, has h-id 15, has t-id 10, has r-id 12;
+		$task-for-resource16 isa task-for-resource, has h-id 16, has t-id 10, has r-id 9;
+		$task-for-resource17 isa task-for-resource, has h-id 17, has t-id 11, has r-id 15;
+		$task-for-resource20 isa task-for-resource, has h-id 20, has t-id 12, has r-id 16;
+		$task-for-resource21 isa task-for-resource, has h-id 21, has t-id 12, has r-id 17;
+		$task-for-resource22 isa task-for-resource, has h-id 22, has t-id 13, has r-id 3;
+		$task-for-resource23 isa task-for-resource, has h-id 23, has t-id 14, has r-id 18;
+		$task-for-resource24 isa task-for-resource, has h-id 24, has t-id 14, has r-id 19;
+		$task-for-resource25 isa task-for-resource, has h-id 25, has t-id 15, has r-id 13;
+		$task-for-resource26 isa task-for-resource, has h-id 26, has t-id 16, has r-id 20;
+
+	#RESOURCE FOR GATHERING INFO TASKS#
+		$task-for-resource27 isa task-for-resource, has h-id 27, has t-id 17, has r-id 24;
+		$task-for-resource28 isa task-for-resource, has h-id 28, has t-id 17, has r-id 25;
+		$task-for-resource29 isa task-for-resource, has h-id 29, has t-id 17, has r-id 26;
+		$task-for-resource30 isa task-for-resource, has h-id 30, has t-id 18, has r-id 27;
+		$task-for-resource31 isa task-for-resource, has h-id 31, has t-id 18, has r-id 28;
+		$task-for-resource32 isa task-for-resource, has h-id 32, has t-id 19, has r-id 2;
+		$task-for-resource33 isa task-for-resource, has h-id 33, has t-id 20, has r-id 29;
+		$task-for-resource34 isa task-for-resource, has h-id 34, has t-id 20, has r-id 30;
+		$task-for-resource35 isa task-for-resource, has h-id 35, has t-id 20, has r-id 31;
+		$task-for-resource36 isa task-for-resource, has h-id 36, has t-id 21, has r-id 11;
+		$task-for-resource37 isa task-for-resource, has h-id 37, has t-id 21, has r-id 5;
+		$task-for-resource38 isa task-for-resource, has h-id 38, has t-id 22, has r-id 32;
+		$task-for-resource45 isa task-for-resource, has h-id 45, has t-id 22, has r-id 36;
+		$task-for-resource39 isa task-for-resource, has h-id 39, has t-id 23, has r-id 1;
+		$task-for-resource39 isa task-for-resource, has h-id 39, has t-id 23, has r-id 37;
+		$task-for-resource40 isa task-for-resource, has h-id 40, has t-id 23, has r-id 2;
+		$task-for-resource41 isa task-for-resource, has h-id 41, has t-id 24, has r-id 11;
+		$task-for-resource42 isa task-for-resource, has h-id 42, has t-id 24, has r-id 33;
+		$task-for-resource43 isa task-for-resource, has h-id 43, has t-id 24, has r-id 34;
+		$task-for-resource44 isa task-for-resource, has h-id 44, has t-id 25, has r-id 11;
+		$task-for-resource45 isa task-for-resource, has h-id 45, has t-id 25, has r-id 34;
+
+#ATTACKS#
+	#ATTACKS FOR INJECTION TASKS#
+		#ATTACK FOR SQL INJECTION TASK#
+			$h-attack1 isa h-attack, has h-id 1, has name "Check errors in answers with generic testing fuzzlist", has t-id 5;
+			$h-attack6 isa h-attack, has h-id 6, has name "Check reflection in answers with generic testing fuzzlist", has t-id 1;
+			$h-attack8 isa h-attack, has h-id 8, has name "Check data disclosure in answers with generic testing fuzzlist", has t-id 27;
+	#ATTACKS FOR GATHERING INFORMATION TASKS#
+		#ATTACK FOR IDENTIFY ENTRY POINTS#
+			$h-attack2 isa h-attack, has h-id 2, has name "Enumerate parameters", has t-id 22;
+			$h-attack5 isa h-attack, has h-id 5, has name "Enumerate database entry points", has t-id 22;
+			$h-attack7 isa h-attack, has h-id 7, has name "Enumerate Scripts which take filenames as parameter", has t-id 22;
+		#ATTACK FOR MAP THE EXECUTION PATH#
+			$h-attack3 isa h-attack, has h-id 3, has name "Web application spidering", has t-id 23;
+			$h-attack4 isa h-attack, has h-id 4, has name "Leverage webserver", has t-id 23;
+
+#REQUIRED RESOURCE RELATIONS#
+    #TASK TESTING FOR REFLECTED CROSS SITE SCRIPTING NEEDS APP ENTRY POINTS#
+	$req-rel2(is-required: $r36, requires: $h-task1) isa required-knowledge;
+    #TASK TESTING FOR SQL INJECTION NEDDS DATABASE ENTRY POINTS#
+	$req-rel4(is-required: $r38, requires: $h-task5) isa required-knowledge;
+    #TASK IDENTIFY APP ENTRY POINTS NEEDS APP MAP#
+	$req-rel3(is-required: $r37, requires: $h-task22) isa required-knowledge;
+    #TASK LOCAL FILE INCLUSION NEEDS Scripts which take filenames as parameter#
+	$req-rel5(is-required: $r39, requires: $h-task27) isa required-knowledge;
+	
+	
+#ACQUIRED RESOURCES RELATIONS#
+	#ACQUIRED FOR TASKS#	
+	    #TASK IDENTIFY APP ENTRY POINTS ACQUIRES ENTRY POINTS#
+		$acq-rel1(is-acquired: $r36, acquires: $h-task22) isa acquired-knowledge;
+	    #TASK IDENTIFY APP ENTRY POINTS ACQUIRES DATABASE ENTRY POINTS#
+		$acq-rel6(is-acquired: $r38, acquires: $h-task22) isa acquired-knowledge;
+	    #TASK MAP EXE PATH ACQUIRES APP MAP#
+		$acq-rel5(is-acquired: $r37, acquires: $h-task23) isa acquired-knowledge;
+	    #TASK IDENTIFY APP ENTRY POINTS ACQUIRES Scripts which take filenames as parameter#
+		$acq-rel7(is-acquired: $r39, acquires: $h-task22) isa acquired-knowledge;
+		
+	#ACQUIRED FOR ATTACKS#
+	    #ATTACK APP SPIDERING ACQUIRES APP MAP#
+		$acq-rel3(is-acquired: $r37, acquires: $h-attack3) isa acquired-knowledge;
+	    #ATTACK ENUMERATE PARAM ACQUIRES APP ENTRY POINTS#
+		$acq-rel2(is-acquired: $r36, acquires: $h-attack2) isa acquired-knowledge;
+	    #ATTACK ENUMERATE DATABASE ENTRY POINTS ACQUIRES DATABASE ENTRY POINTS#
+		$acq-rel4(is-acquired: $r38, acquires: $h-attack5) isa acquired-knowledge;
+	    #ATTACK ENUMERATE SCRIPTS WHICH TAKE FILENAMES AS PARAMETER ACQUIRES SCRIPTS WHICH TAKE FILENAME AS PARAMETER#
+		$acq-rel8(is-acquired: $r39, acquires: $h-attack7) isa acquired-knowledge;

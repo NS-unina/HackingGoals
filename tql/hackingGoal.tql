@@ -1,0 +1,306 @@
+define
+
+#####Entities#####
+	
+vulnerability sub entity,
+	owns h-id,
+	owns name,
+	owns owasp-top-10,
+	plays vulnerability-to-scope:exploits,
+	plays vulnerability-to-resource:exploits,
+	plays vuln-to-task:is-exploited;
+
+scope sub entity,
+	owns h-id,
+	owns name,
+	plays vulnerability-to-scope:is-exploited;
+	
+resource sub entity,
+	owns h-id,
+	owns name,
+	owns resource-reference,
+	plays vulnerability-to-resource:is-exploited,
+	plays task-to-resource:is-exploited,
+	plays required-knowledge:is-required,
+	plays acquired-knowledge:is-acquired,
+	plays acquired-fact:is-acquired;
+
+h-task sub entity,
+	owns h-id,
+	owns name,
+	owns owasp-top-10,
+	owns owasp-testing-id,
+	plays task-to-resource:exploits,
+	plays vuln-to-task:exploits,
+	plays master-to-dependant:dependant,
+	plays master-to-dependant:master,
+	plays task-to-attack:is-made-by,
+	plays required-knowledge:requires,
+	plays acquired-knowledge:acquires,
+	plays acquired-fact:acquires;
+	
+vuln-for-resource sub entity,
+	owns h-id,
+	owns v-id,
+	owns r-id;
+	
+vuln-for-scope sub entity,
+	owns h-id,
+	owns v-id,
+	owns s-id;
+	
+task-for-resource sub entity,
+	owns h-id,
+	owns r-id,
+	owns t-id;
+
+h-attack sub entity,
+	owns h-id,
+	owns name,
+	owns t-id,
+	plays attack-to-action:is-made-by,
+	plays acquired-fact:acquires,
+	plays acquired-knowledge:acquires,
+	plays task-to-attack:makes;
+	
+h-action sub entity,
+	owns h-id,
+	owns HTTP-Method,
+	owns path,
+	owns a-id,
+	owns session-cookie,
+	owns payload,
+	plays attack-to-action:makes,
+	plays action-to-response:is-made-by;
+
+response sub entity,
+	owns h-id,
+	owns status-code,
+	owns payload,
+	owns response-time,
+	owns a-id,
+	plays action-to-response:makes;
+	
+#####Relations#####
+	
+#Relations among entities
+
+vulnerability-to-scope sub relation,
+	relates is-exploited,
+	relates exploits;
+
+vulnerability-to-resource sub relation,
+	relates is-exploited,
+	relates exploits;
+	
+task-to-resource sub relation,
+	relates is-exploited,
+	relates exploits;
+
+task-to-attack sub relation,
+	relates is-made-by,
+	relates makes;
+
+attack-to-action sub relation,
+	relates is-made-by,
+	relates makes;
+	
+vuln-to-task sub relation,
+	relates exploits,
+	relates is-exploited;
+	
+master-to-dependant sub relation,
+	relates dependant,
+	relates master;
+	
+action-to-response sub relation,
+	relates makes,
+	relates is-made-by;
+	
+required-knowledge sub relation,
+	relates is-required,
+	relates requires;
+	
+acquired-knowledge sub relation,
+	relates is-acquired,
+	relates acquires;
+	
+acquired-fact sub relation,
+	relates is-acquired,
+	relates acquires;
+		
+#####Attributes#####
+
+h-id sub attribute,
+	value long;
+
+name sub attribute,
+	value string;
+
+description sub attribute,
+	value string;
+
+status-code sub attribute,
+	value long;
+	
+owasp-top-10 sub attribute,
+	value string;
+
+v-id sub attribute,
+	value long;
+
+s-id sub attribute,
+	value long;
+	
+t-id sub attribute,
+	value long;
+	
+r-id sub attribute,
+	value long;
+	
+owasp-testing-id sub attribute,
+	value string;
+	
+resource-reference sub attribute,
+	value string;
+	
+priority-level sub attribute,
+	value long;
+
+path sub attribute,
+	value string;
+
+HTTP-Method sub attribute,
+	value string;
+
+session-cookie sub attribute,
+	value string;
+
+response-time sub attribute,
+	value double;
+	
+a-id sub attribute,
+	value long;
+	
+payload sub attribute,
+	value string;
+	
+#####Rules#####
+define 
+	rule vuln-to-scope:
+when {
+	$s isa scope, has h-id $h-id1;
+	$v isa vulnerability, has h-id $h-id2;
+	$v-r isa vuln-for-scope, has v-id $v-id1, has s-id $s-id1;
+	$v-id1 = $h-id2;
+	$s-id1 = $h-id1;
+}  then {
+	(is-exploited: $s, exploits: $v) isa vulnerability-to-scope;
+};
+
+define 
+	rule vuln-to-resource:
+when {
+	$r isa resource, has h-id $h-id1;
+	$v isa vulnerability, has h-id $h-id2;
+	$v-r isa vuln-for-resource, has v-id $v-id1, has r-id $r-id1;
+	$v-id1 = $h-id2;
+	$r-id1 = $h-id1;
+} then {
+	(is-exploited: $r, exploits: $v) isa vulnerability-to-resource;
+};
+
+define 
+	rule task-to-resource:
+when {
+	$r isa resource, has h-id $h-id1;
+	$t isa h-task, has h-id $h-id2;
+	$t-r isa task-for-resource, has t-id $t-id1, has r-id $r-id1;
+	$h-id1 = $r-id1;
+	$h-id2 = $t-id1;
+} then {
+	(is-exploited: $r, exploits: $t) isa task-to-resource;
+};
+
+define 
+	rule task-to-attack:
+when {
+	$t isa h-task, has h-id $n1;
+	$at isa h-attack, has t-id $m2;
+	$n1 = $m2;
+} then {
+	(is-made-by: $t, makes: $at) isa task-to-attack;
+};
+
+define 
+	rule attack-to-action:
+when {
+	$at isa h-attack, has h-id $n1;
+	$ac isa h-action, has a-id $m2;
+	$n1 = $m2;
+} then {
+	(is-made-by: $at, makes: $ac) isa attack-to-action;
+};
+
+define
+	rule action-to-response:
+when {
+	$a isa h-action, has h-id $a2;
+	$r isa response, has a-id $a1;
+	$a1 = $a2;
+} then {
+	(is-made-by: $a, makes: $r) isa action-to-response;
+};
+
+
+define 
+	rule vuln-to-task:
+when {
+	$r isa resource;
+	$t isa h-task, has owasp-top-10 $vc1;
+	$v isa vulnerability, has owasp-top-10 $vc2;
+	$t-r(is-exploited: $r, exploits: $t) isa task-to-resource;
+	$v-r(is-exploited: $r, exploits: $v) isa vulnerability-to-resource;
+	$vc1 = $vc2;
+} then {
+	(is-exploited: $v, exploits: $t) isa vuln-to-task;
+};
+
+define 
+	rule master-to-dependent:
+when {
+	$t1 isa h-task;
+	$t2 isa h-task;
+	$r isa resource;
+	$t-r1(is-required: $r, requires: $t1) isa required-knowledge;
+	$t-r2(is-acquired: $r, acquires: $t2) isa acquired-knowledge;
+	not{$rel-acq-fact(is-acquired: $r, acquires: $t2) isa acquired-fact;};
+} then {
+	(master: $t2, dependant: $t1) isa master-to-dependant;
+};
+
+define
+	rule attack-acquires-knowledge:
+when {
+	$at1 isa h-attack;
+	$ac1 isa h-action;
+	$r isa resource;
+	$rel-attack-to-action(is-made-by: $at1, makes: $ac1) isa attack-to-action;
+	$rel-acquired-knowledge(acquires: $at1, is-acquired: $r) isa acquired-knowledge;
+} then {	
+	(is-acquired: $r, acquires: $at1) isa acquired-fact;
+};
+
+define 
+	rule task-acquires-knowledge:
+when {
+	$t1 isa h-task;
+	$at1 isa h-attack;
+	$r isa resource;
+	$rel-task-to-attack(is-made-by: $t1, makes: $at1) isa task-to-attack;
+	$rel-acquired-knowledge(acquires: $t1, is-acquired: $r) isa acquired-knowledge;
+	$rel-acquired-fact(acquires: $at1, is-acquired: $r) isa acquired-fact;
+	
+} then {
+	(is-acquired: $r, acquires: $t1) isa acquired-fact;
+};
