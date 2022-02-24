@@ -1,38 +1,29 @@
 # Hacking Goals Knowledge Base
-## About The Project
 Hacking Goal Knowledge Base. The project aims to model the web attacker behavior through a Knowledge Graph. 
 
 
+### Set up with Docker
+Setting up the project is very simple with Docker Container. So, I suggest using the following commands to try this project.
 
-
-### Docker run
-To launch the docker container, use the command `docker compose up`.
-To access the terminal of the docker container use `sudo docker exec -it docker_grakn-service bash`.
-To compile the grakn files go to the (container) folder grakn-core-all-linux and run the commands:
-
+```bash
+git clone https://github.com/NS-unina/HackingGoals.git
+cd HackingGoals
+docker-compose up -d
+docker exec hackinggoals_typedb_1 bash -c '/opt/typedb-all-linux/typedb console --script="/tql/script"'
 ```
-cd grakn-core-all-linux
-./grakn console --keyspace hacking_goal --file /hacking-goals/hackingGoal.gql
-./grakn console --keyspace hacking_goal --file /hacking-goals/mydata.gql
-```
-
-
-
 
 ## Vaticle-TypeDB: Quick Guide   
 ### Transaction write data    
-```  
-database create test
-transaction test schema write
-    define person sub entity;
+If you want to try our schema in your instance of typeDB, you can use this code snippet on TypeDB condole.
+
+```
+database create hacking_goal
+transaction hacking_goal schema write
+    source /tql/hackingGoal.tql
     commit
-transaction test data write
-    insert $x isa person;
+transaction hacking_goal data write
+    source /tql/mydata.tql
     commit
-transaction test data read
-    match $x isa person;
-    close
-database delete test
 ```   
 
 ### Match clause   

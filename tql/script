@@ -1,0 +1,7 @@
+database create hacking_goal
+transaction hacking_goal schema write
+    source /tql/hackingGoal.tql
+    commit
+transaction hacking_goal data write
+    source /tql/mydata.tql
+    commit
