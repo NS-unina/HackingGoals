@@ -52,28 +52,6 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 
-### Installation
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [] Feature 1
-- [] Feature 2
-- [] Feature 3
-    - [] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBUTING -->
@@ -106,11 +84,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Francesco Caturano - francesco.caturano@unina.it
-Emanuele De Martino - eman.demartino@studenti.unina.it
-Gaetano Perrone - gaetano.perrone@unina.it
+* Francesco Caturano - francesco.caturano@unina.it
+* Emanuele De Martino - eman.demartino@studenti.unina.it
+* Gaetano Perrone - gaetano.perrone@unina.it
 
-Project Link: [https://github.com/NS-unina/HackingGoals](https://github.com/NS-unina/HackingGoals)
+* Project Link: [https://github.com/NS-unina/HackingGoals](https://github.com/NS-unina/HackingGoals)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
